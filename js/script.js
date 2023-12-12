@@ -2,6 +2,7 @@
 const nombre = document.getElementById('nombre');
 const apellidos = document.getElementById('apellidos');
 const form = document.getElementById('form');
+const selector = document.getElementById('size');
 
 form.addEventListener('submit', (e) => {
         if ( nombre.value == '') {
@@ -18,3 +19,16 @@ form.addEventListener('submit', (e) => {
             alert('El campo de "Apellidos" es obligatorio');
         }
     })
+
+$("#size").on('change', function() {
+    console.log(this.value);
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:5000/checksize",
+        data: "size=" + this.value,
+        success: function(data){
+            console.log(data)
+            $("#result_size").text(data);
+            },
+        })
+});
